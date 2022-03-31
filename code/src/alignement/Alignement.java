@@ -22,9 +22,10 @@ public class Alignement {
 			String[] text2 = d2.get_paragraph_as_tokens(p);
 			
 			int[][] C = generateC(text1, text2, t);
-	        ArrayList<String> LCS = getLCS(C, text1, text2, text1.length, text2.length, t);
+	        ArrayList<String> LCS = getLCS(C, text1, text2, text1.length, text2.length, t);//TODO Save this one?
 
-	        alignText(text1,text2,LCS,t);
+	        ArrayList<String>[] aligned_texts = alignText(text1,text2,LCS,t);
+	        //align_texts(text1,text2,LCS,t); 
 		}
 	}
 
@@ -54,6 +55,14 @@ public class Alignement {
 		return col1[len1];
 	}
 
+	/**
+	 * Variant of normal Edit distance.
+	 * 
+	 * @param text1
+	 * @param text2
+	 * @param t
+	 * @return
+	 */
 	int[][] generateC(String[] text1, String[] text2, int t) {
 		int[][] C = new int[text1.length + 1][text2.length + 1];
 
@@ -76,6 +85,17 @@ public class Alignement {
 		return C;
 	}
 
+	/**
+	 * Computes the anchor words, which are used for aligning the text. The result can bes seen as the actual alignment.
+	 * 
+	 * @param C
+	 * @param text1
+	 * @param text2
+	 * @param i
+	 * @param j
+	 * @param t
+	 * @return
+	 */
 	ArrayList<String> getLCS(int[][] C, String[] text1, String[] text2, int i, int j, int t) {
 		if (i == 0 || j == 0) {
 			return new ArrayList<>();
@@ -92,6 +112,15 @@ public class Alignement {
 		}
 	}
 
+	/**
+	 * Prints and returns a displayable alignment of the texts
+	 * 
+	 * @param text1
+	 * @param text2
+	 * @param LCS
+	 * @param t
+	 * @return
+	 */
 	ArrayList<String>[] alignText(String[] text1, String[] text2, ArrayList<String> LCS, int t) {
 		int i = 0;
 		int j = 0;
@@ -136,5 +165,40 @@ public class Alignement {
 			j++;
 		}
 		return aligned_text_fragments;
+	}
+	
+	void align_texts(String[] text1, String[] text2, ArrayList<String> LCS, int t) {
+		int i = 0;
+		int j = 0;
+		
+		String format = "%-10s%s%n"; // for fixed distance between words
+
+		for (String s : LCS) {
+			String to_print_left  = "";
+			String to_print_right = "";
+			
+			while (i < text1.length && getShortestEditLength(text1[i], s) > t) { 
+				to_print_left+=text1[i]+" ";
+				i++;
+			}
+			while (j < text2.length && getShortestEditLength(text2[j], s) > t) { // print every word from text2 until											// the next part of the LCS is found
+				to_print_right+=text2[j]+" ";
+				j++;
+			}
+			to_print_left+=text1[i]+" ";
+			to_print_right+=text2[j]+" ";
+			System.out.println(to_print_left+"\t"+to_print_right);
+			i++;
+			j++;
+		}
+		// print remaining strings from text after last LCS string
+		while (i < text1.length) {
+			System.out.println(text1[i]);
+			i++;
+		}
+		while (j < text2.length) {
+			System.out.printf(format, "", text2[j]);
+			j++;
+		}
 	}
 }
