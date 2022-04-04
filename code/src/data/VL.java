@@ -1,6 +1,12 @@
 package data;
 
-public class VL {
+public class VL extends DataSource{
+	public static final VL instance = new VL();
+	
+	private VL() {
+		//Ensure Class is singleton
+	}
+	
 	public static String[] text = {
 			"VL"
 			, "1 1 Et factum est"
@@ -484,4 +490,47 @@ public class VL {
 			, "in omni muliere."
 			, ""
 	};
+	
+	public static String[][] text_in_paragraphs = {
+			{"VL",""} 
+			, {"1:1", "Et factum est in diebus Artaxerxis, ipse est Artaxerses regnans ab India  usque Ethiopiam centum viginti septem regionibus,"} 
+			, {"1:2", "quando sedit rex Artaxarxes in tribunali regni sui quod erat in Susis Thebari,"} 
+			, {"1:3", "in anno duodecimo regni sui, fecit potum"} 
+			, {"1:5", "his qui erant inventi in Susis Thebari."} 
+			, {"1:6", "Erant autem strata stragula regis derpina et carbasina byssina et hyacinthina, et super organa extensa funibus carbasinis et purpureis sub rotis, columnae parinae lecti aurei et argentei, super lapides marmoratos <stratos>, et pictura varia."} 
+			, {"1:7", "Et vinum multum et suave valde de quo ipse rex bibebat."} 
+			, {"1:8", "Et praecepit actoribus domus nemini vim fieri, sed facere voluntate recumbentium, ad iocunditatem bibere secundum legem."} 
+			, {"1:9", "Et Vasthi regina fecit potum magnum mulieribus in regno Artaxerxis."} 
+			, {"1:10", "Die autem septimo, iucundus factus rex, iussit Maosma et Narbona  et Nabattha et Zatai et Achedes et Thares et Tarecta septem spadonibus qui ministrabant in conspectu regis Artaxerxis"} 
+			, {"1:11", "ut ducerent reginam ad eum ut regnaret et ipsa, et imponeret ei diadema, et demonstraret eam omnibus principibus et gentibus, ut videretur species eius: formosa enim erat."} 
+			, {"1:12", "Et noluit regina venire cum eis, et contristatus est rex et iratus est valde."} 
+			, {"1:13", "Et dixit rex amicis suis secundum haec locuta est Vasthi. Et dixit rex omnibus principibus legem et iudicium."} 
+			, {"1:14", "Et accessit ad eum Mardocheus et Sorathaeas et Pabataleus et Malesath et Mucheas principes Persarum et Medorum, qui proximi erant regi adsidentes ei."} 
+			, {"1:15", "Tunc illi responderunt ei secundum legem quemadmodum oportuerit fieri reginae quoniam non obaudivit his quae a rege dicta erant per spadones."} 
+			, {"1:16", "Et dixit Mardocheus ad regem et ad principes: Non solum nocuit regem Vasthi regina, sed etiam principes regis et gentes regni Artaxerxis."} 
+			, {"1:17", "Audita est autem eo contumelia regis etiam ab omnibus mulieribus, quod contemnerent viros suos. Neglexit enim et contempsit."} 
+			, {"1:18", "Quomodo non et primae mulieres Persarum et Medorum neglegent et contumeliam facient viris suis? Aut quomodo non infamia tradetur adversus regem etiam his qui extra regnum sunt?"} 
+			, {"1:19", "Si ergo placet tibi, maxime rex, et optimum est sensui tuo, iube et scribatur secundum legem Persarum et Medorum et de malitia Vasthi reginae, quomodo abusa sit te, quoniam non introit ad regem Artaxerxen. Et regnum eius tradat rex mulieri digniori et meliori."} 
+			, {"1:20", "Obedietur enim verba regis, quod faciet in regno suo, quoniam verum est, et omnes mulieres habebunt honorem viris suis a pauperibus usque ad honestas."} 
+			, {"1:21", "Et placuit verbum regi et principibus, et fecit rex secundum ea quae locutus est Mardocheus."} 
+			, {"1:22", "Et misit rex in omni regno suo litteras per singulas quasque regiones suas secundum interpretationes eorum, ut esset unusquisque princeps in domum suam: et fuit timor magnus in omni muliere."} 
+	};
+	
+	public static void out_in_paragraphs() {
+		for(String[] paragraph : text_in_paragraphs) {
+			String p_number = paragraph[0];
+			String p_text = paragraph[1];
+			System.out.println(p_number+"\t"+p_text);
+		}
+	}
+
+	@Override
+	public String[] get_text() {
+		return text;
+	}
+
+	@Override
+	public String[][] get_text_in_paragraphs() {
+		return text_in_paragraphs;
+	}
 }
