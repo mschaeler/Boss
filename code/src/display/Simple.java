@@ -126,14 +126,14 @@ public class Simple {
 
 	public static void main(String[] args) {
 		String hack = "וַיִּשְׁלַ֤ח";//File needs to be saved as UTF-8 - otherwise the character output in the console is not correct.
-		String[] text = OG.text;
+		String[] text = JA.text;
 		//AT.out_in_paragraphs();
 		
-		//output(text);
-		//output_as_block(text);
+		output(text);
+		output_as_block(text);
 		//binary_align(text, AT.text);
 		//binary_align_condensed(text, AT.text);
 		
-		new Alignement(AT.instance, OG.instance).align();
+		//new Alignement(AT.instance, OG.instance).align();
 	}	
 }
